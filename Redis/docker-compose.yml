@@ -1,0 +1,28 @@
+version: "3"
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      - ./redis.conf:/etc/redis/redis.conf
+    ports:
+      - "6379:6379"
+    command: 
+      - sh
+      - -c 
+      - | 
+           redis-server --requirepass ${REDIS_PASSWORD}
+           redis-server /etc/redis/redis.conf
+# echo 1 > /proc/sys/vm/overcommit_memory
+
+    networks:
+      - net
+networks:
+  net:
+    external: true
