@@ -1,0 +1,14 @@
+version: "3"
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    restart: always
+    networks:
+      - net
+networks:
+  net:
+    external: true
+      
