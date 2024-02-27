@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+  clash:
+    image: dreamacro/clash
+    restart: always
+    volumes:
+      - /home/bluesky/clash/config.yaml:/root/.config/clash/config.yaml
+    container_name: clash # 容器名称
+    ports:
+# 主机http代理端口:容器http代理端口，默认7890
+# 主机sock5代理端口:容器sock5代理端口，默认7890
+# 主机REST API端口:容器REST API端口，默认9090
+      - 7890:7890
+      - 7891:7891 
+      - 9090:9090 
+    network_mode: "host"
+
+  clash_web:
+    image: haishanh/yacd
+    restart: always
+    depends_on:
+   # 依赖于clash服务，在clash启动后，web才启动
+      - clash
+    ports:
+   # 主机web访问端口 : 容器内部端口，80
+      - 7893:80
+    container_name: clash_web
+    # network_mode: "host"
+# 在浏览器中输入 ​http://ip:7893/​ ​时，进入到 Clash 登录界面。
+# 然后输入 ​http://ip:7892​​，点击 add ，则将 Clash 服务纳入到 web 服务管理中。
