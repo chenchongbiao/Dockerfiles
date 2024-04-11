@@ -1,0 +1,13 @@
+version: "3"
+services:
+  repo:
+    build:
+      context: .
+    image: repo
+    volumes:
+      - ./default:/etc/nginx/sites-enabled/default
+      - ./repos:/var/www/repos
+    container_name: repo
+    ports:
+      - 8080:80
+    restart: always
