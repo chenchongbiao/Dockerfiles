@@ -1,0 +1,27 @@
+version: '3'
+services:
+  bt:
+    image: btpanel/baota:lnmp
+    container_name: bt
+    restart: always
+    ports:
+      - '8888:8888'
+      - '888:888'
+      - '80:80'
+      - '443:443'
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=bt
+      - MYSQL_DATABASE=bt
+      - MYSQL_USER=bt
+      - MYSQL_PASSWORD=bt
+      - BTPANEL_KEY=your_key
+    volumes:
+      - ./database:/root/mysql/
+      - ./www:/www/wwwroot/
+      - ./config:/www/server/panel/data/
+      - ./ssl:/www/server/panel/vhost/cert/
+      - ./logs:/www/server/panel/logs/
+      - ./backup:/www/backup/
