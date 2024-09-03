@@ -1,0 +1,27 @@
+---
+services:
+  webtop:
+    image: linuxserver/webtop:debian-kde
+    container_name: webtop
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - SUBFOLDER=/ #optional
+      - TITLE=Webtop #optional
+      - DOCKER_MODS=linuxserver/mods:universal-package-install 
+      - INSTALL_PACKAGES=fonts-noto-cjk 
+      - LC_ALL=zh_CN.UTF-8
+    volumes:
+      - ./data:/config
+      - ./sources.list:/etc/apt/sources.list
+      - /var/run/docker.sock:/var/run/docker.sock #optional
+    ports:
+      - 3000:3000
+      - 3001:3001
+    devices:
+      - /dev/dri:/dev/dri #optional
+    shm_size: "1gb" #optional
+    restart: unless-stopped
