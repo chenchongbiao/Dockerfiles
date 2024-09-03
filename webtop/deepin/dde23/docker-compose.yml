@@ -1,0 +1,26 @@
+---
+services:
+  webtop:
+    image: chenchongbiao/webtop:deepin-dde
+    container_name: deepin-webtop
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - SUBFOLDER=/ #optional
+      - TITLE=Webtop #optional
+      - DOCKER_MODS=linuxserver/mods:universal-package-install 
+      - INSTALL_PACKAGES=fonts-noto-cjk
+      - LC_ALL=zh_CN.UTF-8
+    volumes:
+      - ./data:/config
+      - ./startwm.sh:/defaults/startwm.sh
+      - /var/run/docker.sock:/var/run/docker.sock #optional
+    ports:
+      - 3002:3000
+    devices:
+      - /dev/dri:/dev/dri #optional
+    shm_size: "1gb" #optional
+    restart: unless-stopped
