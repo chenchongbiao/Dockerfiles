@@ -25,3 +25,6 @@ services:
       - ./ssl:/www/server/panel/vhost/cert/
       - ./logs:/www/server/panel/logs/
       - ./backup:/www/backup/
+      - /var/run/docker.sock:/var/run/docker.sock #optional
+    privileged: true  # 这里启用了特权模式
+    shm_size: "1gb"
