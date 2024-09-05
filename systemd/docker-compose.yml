@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  systemd_test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: systemd_test
+    privileged: true
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    tmpfs:
+      - /tmp
+      - /run
+      - /run/lock
+    cgroup_parent: docker.slice
+    restart: "no"
