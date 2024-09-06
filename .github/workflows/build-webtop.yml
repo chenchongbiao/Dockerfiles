@@ -35,8 +35,12 @@ jobs:
           # docker buildx build --load --platform linux/amd64 -t ${{ env.owner }}/baseimage-kasmvnc:deepinapricot .
           # popd
 
-          pushd webtop/deepin/dde20
-          docker buildx build --load --platform linux/amd64 -t ${{ env.owner }}/webtop:deepin-dde20 .
+          # pushd webtop/deepin/dde20
+          # docker buildx build --load --platform linux/amd64 -t ${{ env.owner }}/webtop:deepin-dde20 .
+          # popd
+
+          pushd deepin-webtop/beige
+          docker buildx build --load --platform linux/amd64 -t ${{ env.owner }}/deepin-webtop .
           popd
 
       - name: Login to Docker Hub
@@ -49,4 +53,5 @@ jobs:
         run: |
           # docker push ${{ env.owner }}/webtop:debian-gxde
           # docker push ${{ env.owner }}/baseimage-kasmvnc:deepinapricot
-          docker push ${{ env.owner }}/webtop:deepin-dde20
+          # docker push ${{ env.owner }}/webtop:deepin-dde20
+          docker push ${{ env.owner }}/deepin-webtop
