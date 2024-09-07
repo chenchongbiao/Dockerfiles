@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -x
+
+PUID=${PUID:-911}
+PGID=${PGID:-911}
+
+groupmod -o -g "$PGID" deepin
+usermod -o -u "$PUID" deepin
+
+if [[ -f /donate.txt ]]; then
+    echo '
+To support the app dev(s) visit:'
+    cat /donate.txt
+fi
+echo '
+
+───────────────────────────────────────
+GID/UID
+───────────────────────────────────────'
+echo "
+User UID:    $(id -u deepin)
+User GID:    $(id -g deepin)
+───────────────────────────────────────"
+if [[ -f /build_version ]]; then
+    cat /build_version
+    echo '
+───────────────────────────────────────
+    '
+fi
+
+lsiown deepin:deepin /app
+lsiown deepin:deepin /config
+lsiown deepin:deepin /defaults

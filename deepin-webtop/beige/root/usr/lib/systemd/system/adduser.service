@@ -1,0 +1,11 @@
+[Unit]
+Description=adduser Service
+After=network.target
+Before=kasmvnc-config.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/init-adduser
+
+[Install]
+WantedBy=multi-user.target

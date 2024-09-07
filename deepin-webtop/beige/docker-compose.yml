@@ -1,18 +1,18 @@
 version: '3.8'
 
 services:
-  systemd_test:
+  deepin-webtop:
+    image: chenchongbiao/deepin-webtop
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: systemd_test
+    container_name: deepin-webtop
     privileged: true
     cap_add:
       - SYS_ADMIN
     security_opt:
       - seccomp:unconfined
     tmpfs:
-      - /tmp
       - /run
       - /run/lock
     ports:
@@ -24,37 +24,16 @@ services:
       - SUBFOLDER=/ #optional
       - TITLE=Webtop #optional
       - https_proxy=http://10.20.42.187:7890
-      - DOCKER_MODS=linuxserver/mods:universal-package-install 
+      - DOCKER_MODS=linuxserver/mods:universal-package-install
       - INSTALL_PACKAGES=fonts-noto-cjk
       - LC_ALL=zh_CN.UTF-8
     volumes:
       - ./data:/config
+      # - ./startwm.sh:/defaults/startwm.sh
+      # - ./root/kasminit:/kasminit
       - /var/run/docker.sock:/var/run/docker.sock #optional
     devices:
       - /dev/dri:/dev/dri #optional
     shm_size: "1gb" #optional
     cgroup_parent: docker.slice
     restart: unless-stopped
-
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Shanghai
-      - SUBFOLDER=/ #optional
-      - TITLE=Webtop #optional
-      - https_proxy=http://10.20.42.187:7890
-      - DOCKER_MODS=linuxserver/mods:universal-package-install 
-      - INSTALL_PACKAGES=fonts-noto-cjk
-      - LC_ALL=zh_CN.UTF-8
-      - XDG_SESSION_TYPE=x11
-      - XDG_SESSION_DESKTOP=dde-x11
-      - XDG_CURRENT_DESKTOP=DDE
-    volumes:
-      - ./data:/config
-      - ./startwm.sh:/defaults/startwm.sh
-      - /var/run/docker.sock:/var/run/docker.sock #optional
-    ports:
-      - 3002:3000
-    devices:
-      - /dev/dri:/dev/dri #optional
-    shm_size: "1gb" #optional

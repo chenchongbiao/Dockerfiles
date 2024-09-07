@@ -18,4 +18,6 @@ setterm blank 0
 setterm powerdown 0
 
 # Launch DE
-/usr/bin/dde-session > /dev/null 2>&1
+/usr/bin/dde-session & > /dev/null 2>&1
+/usr/bin/dde-desktop & > /dev/null 2>&1
+/usr/bin/dde-shell

@@ -1,0 +1,12 @@
+[Unit]
+Description=pulseaudio Service
+After=network.target
+
+[Service]
+Type=simple
+User=deepin
+Group=deepin
+ExecStart=/usr/local/bin/svc-pulseaudio
+
+[Install]
+WantedBy=multi-user.target

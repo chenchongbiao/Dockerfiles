@@ -1,0 +1,13 @@
+[Unit]
+Description=init-video Service
+After=network.target
+After=kasmvnc-config.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/init-video
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

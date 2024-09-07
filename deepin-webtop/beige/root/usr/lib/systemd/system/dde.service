@@ -1,0 +1,16 @@
+[Unit]
+Description=dde Service
+After=network.target
+After=nginx.service
+
+[Service]
+Type=simple
+User=deepin
+Group=deepin
+Environment="TERM=xterm"
+Environment="DISPLAY=:0"
+Environment="HOME=/config"
+ExecStart=/defaults/startwm.sh
+
+[Install]
+WantedBy=multi-user.target

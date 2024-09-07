@@ -1,0 +1,15 @@
+[Unit]
+Description=kclient Service
+After=network.target
+After=kasmvnc.service
+
+[Service]
+User=deepin
+Group=deepin
+ExecStart=/usr/local/bin/kasmclient
+#ExecStart=/bin/bash -c "/kasmclient &> /var/log/kclient.log 2>&1"
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

@@ -584,6 +584,15 @@ RUN \
 # add local files
 COPY /root /
 
+RUN \
+  systemctl enable kasmvnc-config && \
+  systemctl enable video && \
+  systemctl enable adduser && \
+  systemctl enable pulseaudio && \
+  systemctl enable kasmvnc && \
+  systemctl enable kclient && \
+  systemctl enable dde
+
 # ports and volumes
 EXPOSE 3000 3001
 VOLUME /config

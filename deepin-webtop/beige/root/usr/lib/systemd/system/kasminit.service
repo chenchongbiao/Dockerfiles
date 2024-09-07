@@ -1,0 +1,14 @@
+[Unit]
+Description=Kasminit Service
+After=network.target
+
+[Service]
+User=root
+Group=root
+ExecStart=/kasminit &
+#ExecStart=/bin/bash -c "/kasminit &> /var/log/kasminit.log 2>&1"
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

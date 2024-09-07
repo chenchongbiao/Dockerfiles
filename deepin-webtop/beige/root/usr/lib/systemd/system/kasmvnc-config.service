@@ -1,0 +1,13 @@
+[Unit]
+Description=Kasmvnc config Service
+After=network.target
+After=nginx.service
+
+[Service]
+Type=simple
+Environment="HOME=/config"
+ExecStart=/usr/local/bin/init-kasmvnc-config
+#ExecStart=/bin/bash -c "/kasminit &> /var/log/kasminit.log 2>&1"
+
+[Install]
+WantedBy=multi-user.target
